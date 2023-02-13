@@ -1,0 +1,37 @@
+{
+  "name": "intern-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Daniel Marko",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.9"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-async-errors": "^3.1.1",
+    "express-session": "^1.17.3",
+    "express-rate-limit": "^5.3.0",
+    "helmet": "^4.6.0",
+    "http-status-codes": "^2.1.4",
+    "joi": "^17.4.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.13.2",
+    "node-fetch": "^2.6.7",
+    "rate-limiter": "^0.2.0",
+    "passport": "^0.6.0",
+    "passport-jwt": "^4.0.0",
+    "swagger-ui-express": "^4.6.0",
+    "uniqid": "^5.4.0"
+  },
+  "engines": {
+    "node": "14.x"
+  }
+}
