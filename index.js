@@ -12,6 +12,8 @@ const authenticateUser = require('./middleware/authentication');
 // routers
 const userRouter = require('./routes/user');
 const jobsRouter = require('./routes/jobs');
+const employerRouter = require('./routes/employer');
+
 // error handler
 const notFoundMiddleware = require('./middleware/not-found');
 const errorHandlerMiddleware = require('./middleware/error-handler');
@@ -31,6 +33,8 @@ app.use(cors());
 
 // routes
 app.use('/api/user', userRouter);
+app.use('/api/employer', employerRouter);
+
 app.use('/api/jobs', authenticateUser, jobsRouter);
 
 app.use(notFoundMiddleware);
