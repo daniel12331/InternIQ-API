@@ -13,6 +13,7 @@ const authenticateUser = require('./middleware/authentication');
 const userRouter = require('./routes/user');
 const jobsRouter = require('./routes/jobs');
 const employerRouter = require('./routes/employer');
+const applicationRouter = require('./routes/application');
 
 // error handler
 const notFoundMiddleware = require('./middleware/not-found');
@@ -34,6 +35,7 @@ app.use(cors());
 // routes
 app.use('/api/user', userRouter);
 app.use('/api/employer', employerRouter);
+app.use('/api/application', applicationRouter);
 
 app.use('/api/jobs', authenticateUser, jobsRouter);
 

@@ -12,10 +12,24 @@ const JobSchema = new mongoose.Schema(
       required: [true, 'Please provide position'],
       maxlength: 100,
     },
-    status: {
+    jobLocation: {
       type: String,
-      enum: ['interview', 'declined', 'pending'],
-      default: 'pending',
+      required: [true, 'Please provide position'],
+      maxlength: 100,
+    },
+    totalApplicants: {
+      type: Number ,
+      default: 0,
+    },
+    description: {
+      type: String,
+      required: [true, 'Please provide description'],
+
+    },
+    jobType: {
+      type: String,
+      enum: ['In-Office', 'Remote', 'Hybrid'],
+      default: 'In-Office',
     },
     createdBy: {
       type: mongoose.Types.ObjectId,
