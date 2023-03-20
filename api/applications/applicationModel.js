@@ -8,6 +8,12 @@ const ApplicationSchema = new mongoose.Schema({
     maxlength: 50,
     minlength: 3,
   },
+  JobTitle: {
+    type: String,
+    required: [true, 'Please try again later.s..'],
+    maxlength: 50,
+    minlength: 1,
+  },
   name: {
     type: String,
     required: [true, 'Please provide name'],
@@ -22,7 +28,27 @@ const ApplicationSchema = new mongoose.Schema({
       'Please provide a valid email',
     ],
   },
-})
+  feedback: {
+    type: String,
+    maxlength: 450,
+    minlength: 3,
+  },
+  status: {
+    type: String,
+    enum: ['pending', 'declined', 'interview'],
+    default: 'pending',
+  },
+  
+
+  createdBy: {
+    type: mongoose.Types.ObjectId,
+    ref: 'User',
+    required: [true, 'Please provide user'],
+  },
+  
+},
+{ timestamps: true }
+)
 
 
 module.exports = mongoose.model('Application', ApplicationSchema)

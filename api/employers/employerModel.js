@@ -32,7 +32,7 @@ EmployerSchema.pre('save', async function () {
 
 EmployerSchema.methods.createJWT = function () {
   return jwt.sign(
-    { userId: this._id, organisationname: this.organisationname },
+    { employerId: this._id, organisationname: this.organisationname },
     process.env.SECRET,
    
   )
