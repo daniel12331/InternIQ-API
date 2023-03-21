@@ -25,6 +25,7 @@ const login = async (req, res) => {
   }
   // compare password
   const token = employer.createJWT()
+  //console.log(token)
   res.status(StatusCodes.OK).json({ employer: { organisationname: employer.organisationname, organisationemail: employer.organisationemail, token: token} })
 }
 

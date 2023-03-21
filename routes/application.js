@@ -1,8 +1,11 @@
 const express = require('express')
 const router = express.Router()
-const { login, registerapplication } = require('../api/applications/index')
+const { registerapplication, getAllAppliedJobs, deleteApplication, updateApplication,getApplicationsByID } = require('../api/applications/index')
 
 router.post('/registerapplication', registerapplication)
-router.post('/login', login)
+router.route('/').get(getAllAppliedJobs)
+
+router.route('/:id').delete(deleteApplication).patch(updateApplication).get(getApplicationsByID)
+
 
 module.exports = router
