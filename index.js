@@ -19,6 +19,7 @@ const jobsRouter = require('./routes/jobs');
 const employerRouter = require('./routes/employer');
 const applicationRouter = require('./routes/application');
 const fileRouter = require('./routes/file');
+const resumeRouter = require('./routes/resume');
 
 // error handler
 const notFoundMiddleware = require('./middleware/not-found');
@@ -53,6 +54,7 @@ app.use('/api/user', userRouter);
 app.use('/api/employer', employerRouter);
 app.use('/api/application', authenticateUser, applicationRouter);
 app.use('/api/jobs', authenticateEmployer, jobsRouter);
+app.use('/api/resume', resumeRouter);
 
 // Use setGfsMiddleware before using fileRouter
 app.use('/api/file', setGfsMiddleware, fileRouter);
