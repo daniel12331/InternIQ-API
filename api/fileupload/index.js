@@ -56,7 +56,7 @@ const filedownload = async (req, res) => {
       return res.status(404).json({ message: 'File not found' });
     }
 
-    const readStream = gfs.openDownloadStream(ObjectId(docID));
+    const readStream = gfs.openDownloadStream(new ObjectId(docID));
 
     // Set the content-type header to the file's MIME type
     res.setHeader('Content-Type', 'arrayBuffer');

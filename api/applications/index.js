@@ -68,10 +68,16 @@ const updateApplication = async (req, res) => {
   res.status(StatusCodes.OK).json({ application })
 }
 
+const getStats = async (req, res) => {
+  const appliedjobs = await Application.find({createdBy: req.user.userId }).sort('createdAt')
+  res.status(StatusCodes.OK).json({ appliedjobs, count: appliedjobs.length })
+}
+
 module.exports = {
   registerapplication,
   updateApplication,
   getAllAppliedJobs,
   deleteApplication,
-  getApplicationsByID
+  getApplicationsByID,
+  getStats
 }

@@ -26,7 +26,6 @@ const ChatGPTFunction = async (text) => {
 
 const createResume = async (req, res) => {
   try{
-  //console.log(req.body)
   
 	const prompt1 = 
   `I am writing a resume as a undergraduate student looking for a first time internship, my details are 
@@ -49,7 +48,6 @@ const createResume = async (req, res) => {
 
   const chatgptData = { summary, projectdescription };
 
-  console.log(chatgptData)
   res.status(StatusCodes.CREATED).json({ chatgptData });
 }
 catch (error) {
