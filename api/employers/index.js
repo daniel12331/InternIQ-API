@@ -3,7 +3,6 @@ const { StatusCodes } = require('http-status-codes')
 const { BadRequestError, UnauthenticatedError } = require('../../errors')
 
 const register = async (req, res) => {
-  console.log(req.body)
   const employer = await Employer.create({ ...req.body })
   const token = employer.createJWT()
   res.status(StatusCodes.CREATED).json({ employer: { organisationname: employer.organisationname }, token })
@@ -29,7 +28,25 @@ const login = async (req, res) => {
   res.status(StatusCodes.OK).json({ employer: { organisationname: employer.organisationname, organisationemail: employer.organisationemail, token: token} })
 }
 
+const updateUser = async (req, res) => {
+  const {
+    employer: { employerId },
+    body
+  } = req
+
+  const employer = await Employer.findByIdAndUpdate(
+    { _id: employerId},
+    req.body,
+    { new: true, runValidators: true }
+  )
+
+  if (!employer) {
+    throw new NotFoundError(`No user with id ${employerId}`)
+  }
+  res.status(StatusCodes.OK).json({ employer })
+}
 module.exports = {
   register,
   login,
+  updateUser
 }

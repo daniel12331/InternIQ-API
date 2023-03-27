@@ -5,10 +5,21 @@ const { BadRequestError, NotFoundError } = require('../../errors')
 
 
 const getAllJobs = async (req, res) => {
-  const jobs = await Job.find({ }).sort('createdAt')
-  res.status(StatusCodes.OK).json({ jobs, count: jobs.length })
+  const searchQuery = req.query.search;
+  const jobType = req.query.JobType;
+  
+  let criteria = {};
+  if (searchQuery) {
+    criteria.position = searchQuery;
+  }
+  if (jobType) {
+    criteria.JobType = jobType;
+  }
+  
+  const jobs = await Job.find(criteria).sort('createdAt');
+  
+  res.status(StatusCodes.OK).json({ jobs, count: jobs.length });
 }
-
 const getJob = async (req, res) => {
   const {
     params: { id: jobId },
@@ -24,14 +35,12 @@ const getJob = async (req, res) => {
 }
 
 const createJob = async (req, res) => {
-  console.log(req.body)
-  req.body.createdBy = req.user.userId
+  req.body.createdBy = req.employer.employerId
   const job = await Job.create(req.body)
   res.status(StatusCodes.CREATED).json({ job })
 }
 
 const updateJob = async (req, res) => {
-  console.log(req.params.id)
   const {
     body: { company, position },
     user: { userId },
@@ -54,7 +63,6 @@ const updateJob = async (req, res) => {
 }
 
 const updateTotalApplicants = async (req, res) => {
-  console.log(req.body)
   const {
     body: { totalApplicants },
     params: { id: jobId },
@@ -77,13 +85,13 @@ const updateTotalApplicants = async (req, res) => {
 
 const deleteJob = async (req, res) => {
   const {
-    user: { userId },
+    employer: { employerId },
     params: { id: jobId },
   } = req
 
   const job = await Job.findByIdAndRemove({
     _id: jobId,
-    createdBy: userId,
+    createdBy: employerId,
   })
   if (!job) {
     throw new NotFoundError(`No job with id ${jobId}`)

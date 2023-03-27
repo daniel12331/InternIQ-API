@@ -27,7 +27,26 @@ const login = async (req, res) => {
   res.status(StatusCodes.OK).json({ user: { name: user.name, email: user.email, token: token} })
 }
 
+const updateUser = async (req, res) => {
+  const {
+    user: { userId },
+    body
+  } = req
+
+  const user = await User.findByIdAndUpdate(
+    { _id: userId},
+    req.body,
+    { new: true, runValidators: true }
+  )
+
+  if (!user) {
+    throw new NotFoundError(`No user with id ${userId}`)
+  }
+  res.status(StatusCodes.OK).json({ user })
+}
+
 module.exports = {
   register,
   login,
+  updateUser
 }

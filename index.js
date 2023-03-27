@@ -11,7 +11,7 @@ const app = express();
 
 const connectDB = require('./db/index');
 const authenticateUser = require('./middleware/authentication');
-const authenticateEmployer = require('./middleware/employerauthentication');
+
 
 // routers
 const userRouter = require('./routes/user');
@@ -52,8 +52,8 @@ const setGfsMiddleware = (req, res, next) => {
 // routes
 app.use('/api/user', userRouter);
 app.use('/api/employer', employerRouter);
-app.use('/api/application', authenticateUser, applicationRouter);
-app.use('/api/jobs', authenticateEmployer, jobsRouter);
+app.use('/api/application', authenticateUser ,applicationRouter);
+app.use('/api/jobs',authenticateUser, jobsRouter);
 app.use('/api/resume', resumeRouter);
 
 // Use setGfsMiddleware before using fileRouter

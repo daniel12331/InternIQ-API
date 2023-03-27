@@ -47,7 +47,6 @@ const getApplicationsByID = async (req, res) => {
 
 
 const updateApplication = async (req, res) => {
-  console.log(req.body)
   const {
     body: { status, feedback},
     params: { id: _id },
@@ -70,7 +69,8 @@ const updateApplication = async (req, res) => {
 
 const getStats = async (req, res) => {
   const appliedjobs = await Application.find({createdBy: req.user.userId }).sort('createdAt')
-  res.status(StatusCodes.OK).json({ appliedjobs, count: appliedjobs.length })
+
+  res.status(StatusCodes.OK).json({ appliedjobs })
 }
 
 module.exports = {
